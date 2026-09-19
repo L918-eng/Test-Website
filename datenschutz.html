@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Datenschutz – Datenschutzerklärung">
+  <title>[SHOP NAME] — Datenschutz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="info-page">
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="index.html#hero" class="brand">[SHOP NAME]</a>
+      <div class="nav-links">
+        <a href="index.html#experience">Experience</a>
+        <a href="shop.html">Shop</a>
+        <a href="story.html">Unsere Story</a>
+        <a href="index.html#faq">FAQ</a>
+      </div>
+      <button type="button" class="cart-button" aria-label="Warenkorb öffnen" data-open-cart>
+        <span class="cart-label">Warenkorb</span>
+        <span class="cart-count" data-cart-count>0</span>
+      </button>
+    </nav>
+  </header>
+
+  <div class="shop-overlay cart-overlay" id="cart-overlay" aria-hidden="true">
+    <aside class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-header">
+        <div>
+          <p class="section-eyebrow cart-eyebrow">Warenkorb</p>
+          <h3 id="cart-title">Dein Paket</h3>
+        </div>
+        <button type="button" class="icon-button" aria-label="Warenkorb schließen" data-close-cart>×</button>
+      </div>
+      <div class="cart-items" data-cart-items></div>
+      <div class="cart-summary">
+        <div class="summary-row"><span>Zwischensumme</span><strong data-cart-subtotal>€0,00</strong></div>
+        <div class="summary-row"><span>Versand</span><strong data-cart-shipping>Kostenlos</strong></div>
+        <div class="summary-row discount-row"><span>Rabatt</span><strong data-cart-discount>−€0,00</strong></div>
+        <div class="summary-row total-row"><span>Gesamt</span><strong data-cart-total>€0,00</strong></div>
+      </div>
+      <button type="button" class="primary-button cart-checkout" data-checkout-open>
+        Zur Kasse
+        <span>→</span>
+      </button>
+    </aside>
+  </div>
+
+  <div class="shop-overlay checkout-overlay" id="checkout-overlay" aria-hidden="true">
+    <div class="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+      <button type="button" class="icon-button modal-close" aria-label="Checkout schließen" data-close-checkout>×</button>
+      <div class="checkout-header">
+        <div>
+          <p class="section-eyebrow cart-eyebrow">Checkout</p>
+          <h3 id="checkout-title">Fast geschafft</h3>
+        </div>
+      </div>
+      <div class="checkout-summary">
+        <div class="checkout-row"><span>Artikel</span><strong data-checkout-items>0</strong></div>
+        <div class="checkout-row"><span>Lieferung</span><strong data-checkout-shipping>Kostenlos</strong></div>
+        <div class="checkout-row"><span>Gesamt</span><strong data-checkout-total>€0,00</strong></div>
+      </div>
+      <div class="promo-badge" style="margin-top:1rem;">Zahlung folgt später</div>
+      <button type="button" class="primary-button checkout-cta" data-close-checkout>
+        Weiter shoppen
+        <span>→</span>
+      </button>
+    </div>
+  </div>
+
+  <main class="info-shell">
+    <div class="info-card">
+      <p class="section-eyebrow">Datenschutz</p>
+      <h1>Hinweise zum Datenschutz</h1>
+      <p>Wir verarbeiten personenbezogene Daten nur, soweit dies für den Betrieb des Shops und die Beantwortung deiner Anfragen erforderlich ist.</p>
+      <ul>
+        <li>Erfassung von Bestelldaten für die Abwicklung</li>
+        <li>Kontaktinformationen zur Unterstützung</li>
+        <li>Keine Weitergabe an Dritte ohne rechtliche Grundlage</li>
+      </ul>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

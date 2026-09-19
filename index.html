@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="[SHOP NAME] – [KURZER MARKENCLAIM]"
+    >
+
+    <title>[SHOP NAME] — [KURZER CLAIM]</title>
+
+    <!-- Google Fonts – wird später im Design verwendet -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Unser eigenes CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         CURSOR / INTERACTION
+         Wird später mit JavaScript animiert
+    ====================================================== -->
+
+    <div class="cursor-glow"></div>
+
+    <div class="shop-overlay cart-overlay" id="cart-overlay" aria-hidden="true">
+        <aside class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+            <div class="cart-header">
+                <div>
+                    <p class="section-eyebrow cart-eyebrow">Warenkorb</p>
+                    <h3 id="cart-title">Dein Paket</h3>
+                </div>
+                <button type="button" class="icon-button" aria-label="Warenkorb schließen" data-close-cart>
+                    ×
+                </button>
+            </div>
+
+            <div class="cart-items" data-cart-items></div>
+
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Zwischensumme</span>
+                    <strong data-cart-subtotal>€0,00</strong>
+                </div>
+                <div class="summary-row">
+                    <span>Versand</span>
+                    <strong data-cart-shipping>Kostenlos</strong>
+                </div>
+                <div class="summary-row discount-row">
+                    <span>Rabatt</span>
+                    <strong data-cart-discount>−€0,00</strong>
+                </div>
+                <div class="summary-row total-row">
+                    <span>Gesamt</span>
+                    <strong data-cart-total>€0,00</strong>
+                </div>
+                <div class="shipping-progress" data-shipping-progress hidden>
+                    <div class="shipping-progress-label"><span data-shipping-message></span><strong data-shipping-remaining></strong></div>
+                    <div class="shipping-progress-track"><span data-shipping-bar></span></div>
+                </div>
+            </div>
+
+            <button type="button" class="primary-button cart-checkout" data-checkout-open>
+                Zur Kasse
+                <span>→</span>
+            </button>
+        </aside>
+    </div>
+
+    <div class="shop-overlay checkout-overlay" id="checkout-overlay" aria-hidden="true">
+        <div class="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+            <button type="button" class="icon-button modal-close" aria-label="Checkout schließen" data-close-checkout>
+                ×
+            </button>
+
+            <div class="checkout-header">
+                <div>
+                    <p class="section-eyebrow cart-eyebrow">Checkout</p>
+                    <h3 id="checkout-title">Fast geschafft</h3>
+                </div>
+            </div>
+
+            <div class="checkout-summary">
+                <div class="checkout-row">
+                    <span>Artikel</span>
+                    <strong data-checkout-items>0</strong>
+                </div>
+                <div class="checkout-row">
+                    <span>Lieferung</span>
+                    <strong data-checkout-shipping>Kostenlos</strong>
+                </div>
+                <div class="checkout-row">
+                    <span>Gesamt</span>
+                    <strong data-checkout-total>€0,00</strong>
+                </div>
+            </div>
+
+            <div class="promo-badge" style="margin-top: 1rem;">Zahlung folgt später</div>
+
+            <button type="button" class="primary-button checkout-cta" data-close-checkout>
+                Weiter shoppen
+                <span>→</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="shop-overlay product-overlay" id="product-overlay" aria-hidden="true">
+        <div class="product-modal" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+            <button type="button" class="icon-button modal-close" aria-label="Produktdetails schließen" data-close-product>
+                ×
+            </button>
+
+            <div class="product-modal-body">
+                <div class="product-modal-visual">
+                    <img id="product-modal-image" src="[PRODUCT IMAGE]" alt="[PRODUCT NAME]">
+                </div>
+
+                <div class="product-modal-content">
+                    <p class="section-eyebrow product-modal-eyebrow" id="product-modal-category">[PRODUCT CATEGORY]</p>
+                    <h3 id="product-modal-title">[PRODUCT NAME]</h3>
+
+                    <div class="modal-rating">
+                        <span>★★★★★</span>
+                        <small>4.9 / 5</small>
+                    </div>
+
+                    <div class="product-price-block">
+                        <span class="old-price" id="modal-old-price">[ALTER PREIS]</span>
+                        <span class="current-price" id="modal-current-price">[PREIS]</span>
+                    </div>
+
+                    <div class="promo-badge">15% Rabatt für deine erste Bestellung</div>
+
+                    <p class="product-modal-description" id="product-modal-description">
+                        [PRODUKTBESCHREIBUNG]
+                    </p>
+
+                    <ul class="product-modal-list" id="product-modal-features">
+                        <li>[VORTEIL 1]</li>
+                        <li>[VORTEIL 2]</li>
+                        <li>[VORTEIL 3]</li>
+                    </ul>
+
+                    <div class="modal-actions">
+                        <button type="button" class="primary-button" data-add-to-cart data-product-id="luma-essentials" data-product-name="[PRODUCT NAME]" data-product-price="149" data-product-image="[PRODUCT IMAGE]">
+                            In den Warenkorb
+                            <span>→</span>
+                        </button>
+                        <button type="button" class="secondary-button" data-close-product>
+                            Weiter shoppen
+                        </button>
+                    </div>
+
+                    <div class="product-meta-grid">
+                        <div>
+                            <strong>Gratisversand</strong>
+                            <span>ab 50 €</span>
+                        </div>
+                        <div>
+                            <strong>30 Tage</strong>
+                            <span>Rückgabe</span>
+                        </div>
+                        <div>
+                            <strong>2 Jahre</strong>
+                            <span>Garantie</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <nav class="navbar">
+
+            <a href="#hero" class="brand">
+                [SHOP NAME]
+            </a>
+
+            <div class="nav-links">
+
+                <a href="index.html#experience">Experience</a>
+                <a href="shop.html">Shop</a>
+                <a href="story.html">Unsere Story</a>
+                <a href="index.html#faq">FAQ</a>
+
+            </div>
+
+            <button type="button" class="cart-button" aria-label="Warenkorb öffnen" data-open-cart>
+
+                <span class="cart-label">
+                    Warenkorb
+                </span>
+
+                <span class="cart-count" data-cart-count>
+                    0
+                </span>
+
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- =====================================================
+             HERO
+             
+             Die erste Szene der Website.
+             Hier entsteht später die große Intro-Animation.
+        ====================================================== -->
+
+        <section
+            id="hero"
+            class="hero-section"
+        >
+
+            <!-- Hintergrund -->
+            <div class="hero-background"></div>
+
+            <!-- kleine dekorative Elemente -->
+            <div class="hero-particle particle-1"></div>
+            <div class="hero-particle particle-2"></div>
+            <div class="hero-particle particle-3"></div>
+            <div class="hero-particle particle-4"></div>
+
+
+            <div class="hero-content">
+
+                <p class="hero-eyebrow">
+                    [KLEINER CLAIM / BADGE]
+                </p>
+
+                <h1 class="hero-title">
+                    [SHOP NAME]
+                </h1>
+
+                <p class="hero-subtitle">
+                    [DEIN MARKENCLAIM ODER KURZER SATZ,
+                    DER DIE MARKE BESCHREIBT]
+                </p>
+
+                <div class="hero-action">
+
+                    <a
+                        href="#experience"
+                        class="primary-button"
+                    >
+                        Entdecken
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Scroll Indicator -->
+
+            <div class="scroll-indicator">
+
+                <span>
+                    Scroll to explore
+                </span>
+
+                <div class="scroll-line"></div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             EXPERIENCE / TRANSITION
+             
+             Hier wird später die "durch die Wolken fliegen"-
+             Animation stattfinden.
+        ====================================================== -->
+
+        <section
+            id="experience"
+            class="experience-section"
+        >
+
+            <!-- Raum / Himmel -->
+            <div class="experience-world">
+
+                <!-- Wolken -->
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="cloud cloud-3"></div>
+                <div class="cloud cloud-4"></div>
+                <div class="cloud cloud-5"></div>
+                <div class="cloud cloud-6"></div>
+
+                <!-- Licht -->
+                <div class="world-light"></div>
+
+                <!-- Partikel -->
+                <div class="world-particles"></div>
+
+            </div>
+
+
+            <!-- Text, der beim Scrollen erscheint -->
+
+            <div class="experience-content">
+
+                <p class="section-eyebrow">
+                    [KLEINER TEXT]
+                </p>
+
+                <h2>
+                    More than<br>
+                    <span>just a product.</span>
+                </h2>
+
+                <p class="section-description">
+                    [KURZE BESCHREIBUNG DER MARKE.
+                    SPÄTER DURCH ECHTEN TEXT ERSETZEN.]
+                </p>
+
+            </div>
+
+
+            <!-- Floating Feature -->
+
+            <div class="floating-feature feature-one">
+
+                <span class="feature-number">
+                    01
+                </span>
+
+                <span class="feature-text">
+                    [BENEFIT / FEATURE]
+                </span>
+
+            </div>
+
+
+            <div class="floating-feature feature-two">
+
+                <span class="feature-number">
+                    02
+                </span>
+
+                <span class="feature-text">
+                    [BENEFIT / FEATURE]
+                </span>
+
+            </div>
+
+
+            <div class="floating-feature feature-three">
+
+                <span class="feature-number">
+                    03
+                </span>
+
+                <span class="feature-text">
+                    [BENEFIT / FEATURE]
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             PRODUCT REVEAL
+             
+             Das Produkt taucht später aus der Experience auf.
+        ====================================================== -->
+
+        <section
+            id="product"
+            class="product-section"
+        >
+
+            <div class="product-catalog-link">
+                <a href="shop.html">
+                    Gesamten Katalog öffnen
+                    <span>→</span>
+                </a>
+            </div>
+
+            <div class="product-wrapper">
+
+
+                <!-- Produktbild -->
+
+                <div class="product-visual">
+
+                    <div class="product-image-container">
+
+                        <img
+                            src="[PRODUCT IMAGE]"
+                            alt="[PRODUCT NAME]"
+                            class="product-image"
+                        >
+
+                    </div>
+
+                    <div class="product-glow"></div>
+
+                </div>
+
+
+                <!-- Produktinformationen -->
+
+                <div class="product-information">
+
+                    <p class="section-eyebrow">
+                        [PRODUCT CATEGORY]
+                    </p>
+
+                    <h2>
+                        [PRODUCT NAME]
+                    </h2>
+
+                    <p class="product-description">
+                        [PRODUKTBESCHREIBUNG]
+                    </p>
+
+
+                    <!-- Vorteile -->
+
+                    <div class="product-benefits">
+
+                        <div class="benefit">
+                            <span>✓</span>
+                            <p>[VORTEIL 1]</p>
+                        </div>
+
+                        <div class="benefit">
+                            <span>✓</span>
+                            <p>[VORTEIL 2]</p>
+                        </div>
+
+                        <div class="benefit">
+                            <span>✓</span>
+                            <p>[VORTEIL 3]</p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Preis -->
+
+                    <div class="product-price">
+
+                        <span class="old-price">
+                            [ALTER PREIS]
+                        </span>
+
+                        <span class="current-price">
+                            [PREIS]
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-actions">
+                        <button
+                            type="button"
+                            class="primary-button product-button"
+                            data-product-trigger
+                            data-product-id="luma-essentials"
+                            data-product-name="[PRODUCT NAME]"
+                            data-product-category="[PRODUCT CATEGORY]"
+                            data-product-price="149"
+                            data-product-old-price="199"
+                            data-product-image="[PRODUCT IMAGE]"
+                            data-product-description="[PRODUKTBESCHREIBUNG]"
+                            data-product-features="[VORTEIL 1]|[VORTEIL 2]|[VORTEIL 3]"
+                        >
+
+                            Jetzt entdecken
+
+                            <span>→</span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             FEATURES
+        ====================================================== -->
+
+        <section class="features-section">
+
+            <div class="section-heading">
+
+                <p class="section-eyebrow">
+                    [KLEINER CLAIM]
+                </p>
+
+                <h2>
+                    Designed for<br>
+                    <span>[DEINE ZIELGRUPPE]</span>
+                </h2>
+
+            </div>
+
+
+            <div class="features-grid">
+
+
+                <article class="feature-card">
+
+                    <span class="feature-icon">
+                        ✦
+                    </span>
+
+                    <span class="feature-index">
+                        01
+                    </span>
+
+                    <h3>
+                        [FEATURE 01]
+                    </h3>
+
+                    <p>
+                        [BESCHREIBUNG DES FEATURES]
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <span class="feature-icon">
+                        ◌
+                    </span>
+
+                    <span class="feature-index">
+                        02
+                    </span>
+
+                    <h3>
+                        [FEATURE 02]
+                    </h3>
+
+                    <p>
+                        [BESCHREIBUNG DES FEATURES]
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <span class="feature-icon">
+                        ↗
+                    </span>
+
+                    <span class="feature-index">
+                        03
+                    </span>
+
+                    <h3>
+                        [FEATURE 03]
+                    </h3>
+
+                    <p>
+                        [BESCHREIBUNG DES FEATURES]
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             STORY
+        ====================================================== -->
+
+        <section
+            id="story"
+            class="story-section"
+        >
+
+            <div class="story-image">
+
+                <img
+                    src="[STORY IMAGE]"
+                    alt="[BESCHREIBUNG DES BILDES]"
+                >
+
+            </div>
+
+
+            <div class="story-content">
+
+                <p class="section-eyebrow">
+                    [ÜBER UNS]
+                </p>
+
+                <h2>
+                    [UNSERE<br>
+                    GESCHICHTE]
+                </h2>
+
+                <p>
+                    [TEXT ÜBER DIE MARKE]
+                </p>
+
+                <p>
+                    [WEITERER TEXT ÜBER DIE IDEE,
+                    PHILOSOPHIE ODER PRODUKTE]
+                </p>
+
+                <a
+                    href="story.html"
+                    class="text-link"
+                >
+                    Mehr über uns →
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             SOCIAL PROOF / REVIEWS
+        ====================================================== -->
+
+        <section class="reviews-section">
+
+            <div class="section-heading">
+
+                <p class="section-eyebrow social-proof-label">
+                    [SOCIAL PROOF]
+                </p>
+
+                <h2>
+                    Loved by<br>
+                    <span>our community.</span>
+                </h2>
+
+            </div>
+
+
+            <div class="reviews-grid">
+
+
+                <article class="review-card">
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <blockquote>
+                        "[KUNDENBEWERTUNG]"
+                    </blockquote>
+
+                    <p class="review-author">
+                        — [NAME]
+                    </p>
+
+                </article>
+
+
+                <article class="review-card">
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <blockquote>
+                        "[KUNDENBEWERTUNG]"
+                    </blockquote>
+
+                    <p class="review-author">
+                        — [NAME]
+                    </p>
+
+                </article>
+
+
+                <article class="review-card">
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <blockquote>
+                        "[KUNDENBEWERTUNG]"
+                    </blockquote>
+
+                    <p class="review-author">
+                        — [NAME]
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             FAQ
+        ====================================================== -->
+
+        <section
+            id="faq"
+            class="faq-section"
+        >
+
+            <div class="faq-heading">
+
+                <p class="section-eyebrow">
+                    FAQ
+                </p>
+
+                <h2>
+                    Questions?<br>
+                    <span>We've got answers.</span>
+                </h2>
+
+            </div>
+
+
+            <div class="faq-list">
+
+
+                <details class="faq-item">
+
+                    <summary>
+                        [FRAGE 01]
+                        <span>+</span>
+                    </summary>
+
+                    <div class="faq-answer">
+                        <p>
+                            [ANTWORT AUF FRAGE 01]
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <details class="faq-item">
+
+                    <summary>
+                        [FRAGE 02]
+                        <span>+</span>
+                    </summary>
+
+                    <div class="faq-answer">
+                        <p>
+                            [ANTWORT AUF FRAGE 02]
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <details class="faq-item">
+
+                    <summary>
+                        [FRAGE 03]
+                        <span>+</span>
+                    </summary>
+
+                    <div class="faq-answer">
+                        <p>
+                            [ANTWORT AUF FRAGE 03]
+                        </p>
+                    </div>
+
+                </details>
+
+
+                <details class="faq-item">
+
+                    <summary>
+                        [FRAGE 04]
+                        <span>+</span>
+                    </summary>
+
+                    <div class="faq-answer">
+                        <p>
+                            [ANTWORT AUF FRAGE 04]
+                        </p>
+                    </div>
+
+                </details>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             FINAL CTA
+        ====================================================== -->
+
+        <section class="final-cta">
+
+            <div class="cta-background"></div>
+
+            <div class="cta-content">
+
+                <p class="section-eyebrow">
+                    [FINALER CLAIM]
+                </p>
+
+                <h2>
+                    Ready to<br>
+                    <span>experience it?</span>
+                </h2>
+
+                <a
+                    href="#product"
+                    class="primary-button"
+                >
+                    Produkt entdecken
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer" id="footer">
+
+        <div class="footer-main">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="#hero"
+                    class="brand"
+                >
+                    [SHOP NAME]
+                </a>
+
+                <p>
+                    [KURZER MARKENCLAIM]
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Shop
+                </h4>
+
+                <a href="#product">
+                    Produkt
+                </a>
+
+                <a href="#experience">
+                    Experience
+                </a>
+
+                <a href="#faq">
+                    FAQ
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Unternehmen
+                </h4>
+
+                <a href="#story">
+                    Über uns
+                </a>
+
+                <a href="contact.html">
+                    Kontakt
+                </a>
+
+                <a href="contact.html">
+                    Instagram
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Rechtliches
+                </h4>
+
+                <a href="impressum.html">
+                    Impressum
+                </a>
+
+                <a href="datenschutz.html">
+                    Datenschutz
+                </a>
+
+                <a href="agb.html">
+                    AGB
+                </a>
+
+                <a href="widerrufsbelehrung.html">
+                    Widerrufsbelehrung
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 [SHOP NAME]
+            </span>
+
+            <span>
+                All rights reserved.
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         
+         Wird später für:
+         - Scroll Animation
+         - Wolken
+         - Parallax
+         - Cursor
+         - Produkt Reveal
+         - Navigation
+         verwendet.
+    ====================================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Checkout und Zahlungsarten">
+  <title>[SHOP NAME] — Zahlung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="checkout-page">
+  <header class="site-header">
+    <nav class="navbar">
+      <a href="index.html#hero" class="brand">[SHOP NAME]</a>
+      <a href="shop.html" class="checkout-back">← Zurück zum Shop</a>
+    </nav>
+  </header>
+
+  <main class="checkout-shell">
+    <div class="checkout-page-heading">
+      <p class="section-eyebrow checkout-eyebrow">Sicherer Checkout</p>
+      <h1>Deine Bestellung<br><span>ist fast bereit.</span></h1>
+    </div>
+
+    <div class="checkout-layout">
+      <section class="payment-panel">
+        <div class="checkout-section-block">
+          <div class="checkout-panel-heading"><div><span class="checkout-step">01</span><h2>Kontakt</h2></div></div>
+          <label class="checkout-form-label">E-Mail-Adresse<input type="email" name="email" form="payment-form" placeholder="deine@email.de" required></label>
+          <label class="checkout-guest-option"><input type="checkbox" checked> Als Gast bestellen</label>
+        </div>
+
+        <div class="checkout-section-block">
+          <div class="checkout-panel-heading"><div><span class="checkout-step">02</span><h2>Lieferadresse</h2></div></div>
+          <div class="address-grid">
+            <label class="checkout-form-label">Vorname<input type="text" name="firstName" form="payment-form" autocomplete="given-name" required></label>
+            <label class="checkout-form-label">Nachname<input type="text" name="lastName" form="payment-form" autocomplete="family-name" required></label>
+            <label class="checkout-form-label address-wide">Straße und Hausnummer<input type="text" name="address" form="payment-form" autocomplete="street-address" required></label>
+            <label class="checkout-form-label">PLZ<input type="text" name="zip" form="payment-form" autocomplete="postal-code" required></label>
+            <label class="checkout-form-label">Ort<input type="text" name="city" form="payment-form" autocomplete="address-level2" required></label>
+            <label class="checkout-form-label address-wide">Land<select name="country" form="payment-form"><option>Deutschland</option><option>Österreich</option><option>Schweiz</option></select></label>
+          </div>
+          <fieldset class="shipping-options">
+            <legend>Versandart</legend>
+            <label class="shipping-option"><input type="radio" name="shipping" value="standard" form="payment-form" checked><span><strong>Standardversand</strong><small>2–4 Werktage</small></span><b>Kostenlos</b></label>
+            <label class="shipping-option"><input type="radio" name="shipping" value="express" form="payment-form"><span><strong>Expressversand</strong><small>Nächster Werktag</small></span><b>+ 9,90 €</b></label>
+          </fieldset>
+        </div>
+
+        <div class="checkout-panel-heading">
+          <div><span class="checkout-step">03</span><h2>Zahlungsart</h2></div>
+          <span class="secure-label">Sicher verschlüsselt</span>
+        </div>
+        <form class="payment-form" id="payment-form" data-payment-form>
+          <fieldset class="payment-methods">
+            <legend>Zahlungsmethode auswählen</legend>
+            <label class="payment-option"><input type="radio" name="payment" value="card" checked><span><strong>Kredit- oder Debitkarte</strong><small>Visa, Mastercard, American Express</small></span><b>▣</b></label>
+            <label class="payment-option"><input type="radio" name="payment" value="paypal"><span><strong>PayPal</strong><small>Schnell und geschützt bezahlen</small></span><b>↗</b></label>
+            <label class="payment-option"><input type="radio" name="payment" value="applepay"><span><strong>Apple Pay</strong><small>Direkt mit deinem Gerät bezahlen</small></span><b></b></label>
+            <label class="payment-option"><input type="radio" name="payment" value="klarna"><span><strong>Klarna</strong><small>Später bezahlen oder in Raten</small></span><b>K</b></label>
+          </fieldset>
+          <div class="payment-fields" data-payment-fields>
+            <label>Karteninhaber<input type="text" placeholder="Vor- und Nachname"></label>
+            <label>Kartennummer<input type="text" inputmode="numeric" placeholder="1234 5678 9012 3456"></label>
+            <div class="payment-field-row"><label>Gültig bis<input type="text" placeholder="MM / JJ"></label><label>CVV<input type="text" inputmode="numeric" placeholder="123"></label></div>
+          </div>
+          <div class="payment-action" data-payment-action hidden>
+            <p data-payment-action-text></p>
+            <button type="button" class="secondary-button" data-payment-continue></button>
+          </div>
+          <label class="checkout-consent"><input type="checkbox" required><span>Ich akzeptiere die AGB und die Widerrufsbelehrung.</span></label>
+          <button type="submit" class="primary-button payment-submit" data-payment-submit>Zahlung bestätigen <span>→</span></button>
+          <p class="payment-status" data-payment-status aria-live="polite"></p>
+        </form>
+      </section>
+
+      <aside class="checkout-order-panel">
+        <details class="checkout-summary-details" open>
+          <summary><span>Deine Übersicht</span><span>⌄</span></summary>
+          <div class="checkout-items" data-cart-items></div>
+        </details>
+        <div class="coupon-box">
+          <label for="coupon-code">Gutscheincode</label>
+          <div><input id="coupon-code" type="text" placeholder="Code eingeben" data-coupon-input><button type="button" class="secondary-button" data-coupon-apply>Anwenden</button></div>
+          <p data-coupon-status aria-live="polite"></p>
+        </div>
+        <div class="checkout-price-breakdown">
+          <div><span>Zwischensumme</span><strong data-cart-subtotal>€0,00</strong></div>
+          <div class="checkout-saving-row"><span>Bundle-Ersparnis</span><strong data-checkout-bundle-savings>−€0,00</strong></div>
+          <div class="checkout-saving-row"><span>Shop-Rabatt</span><strong data-cart-discount>−€0,00</strong></div>
+          <div><span>Versand</span><strong data-cart-shipping>Kostenlos</strong></div>
+          <div class="checkout-saving-row"><span>Gutscheincode</span><strong data-coupon-discount>−€0,00</strong></div>
+          <div class="checkout-total"><span>Gesamt</span><strong data-cart-total>€0,00</strong></div>
+        </div>
+        <div class="checkout-reassurance"><strong>Deine Vorteile</strong><span>Gratisversand ab 50 €</span><span>30 Tage Rückgabe</span><span>Sicherer Zahlungsanbieter</span><span>Keine versteckten Kosten</span></div>
+        <div class="payment-trust"><span>Visa</span><span>PayPal</span><span>Apple Pay</span><span>Klarna</span></div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer checkout-footer"><div class="footer-bottom"><span>© 2026 [SHOP NAME]</span><span>Verschlüsselte Verbindung · 30 Tage Rückgabe</span></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
